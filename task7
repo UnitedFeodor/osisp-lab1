@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+if [ $# -ge 2 ] # number of args check
+then
+	
+	if [ -f $src ] # file exists check
+	then
+		gcc "$1" -o "$2.exe" && ./$2.exe
+	else
+		echo "error! file doesn't exist" >&2
+	fi
+else
+	echo "error! 1 - initial file, 2 - result exe file" >&2
+fi

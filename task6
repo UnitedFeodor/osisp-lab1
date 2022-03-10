@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ $# -lt 3 ] #number of params check
+then
+	echo "error! 1 - name of result file, 2 - catalog to search, 3 - desired extension" >&2
+
+elif [ -d $2 ] # second param is a catalog check
+then
+
+	find $2 -type f -name "*.$3" -printf "%f\n"  | sort  -d  > $1
+
+
+else
+
+	echo "error! $2 is not a catalog" >&2
+fi
