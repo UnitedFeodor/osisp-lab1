@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -lt 3 ] 
+then
+echo "not enough parameters: 1user 2directory 3result" >&2
+
+elif [ ! -d $2 ]
+then
+echo "$2 is not a directory" >&2
+elif ! id "$1" &> /dev/null
+then
+    echo "$1 is not a username" >&2
+else
+
+echo $(find "$(readlink -f $2)"  -user $1 -type f -printf "%p %f %sB\n\r") > $3
+echo "total amount of checked files:  $(find  $2 -type f | wc -l)"
+fi
